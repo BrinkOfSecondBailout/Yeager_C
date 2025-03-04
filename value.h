@@ -7,8 +7,8 @@ typedef struct Obj Obj;
 typedef struct ObjString ObjString;
 
 #define MAX_OUTPUT 1024
-char outputBuffer[MAX_OUTPUT];
-int outputPos;
+extern char outputBuffer[MAX_OUTPUT];
+extern int outputPos;
 
 typedef enum {
     VAL_BOOL,

@@ -6,6 +6,10 @@
 #include "object.h"
 #include "value.h"
 
+#define MAX_OUTPUT 1024
+char outputBuffer[MAX_OUTPUT];
+int outputPos;
+
 void initValueArray(ValueArray *array) {
     array->count = 0;
     array->capacity = 0;
