@@ -8,8 +8,6 @@
 #include "value.h"
 #include "vm.h"
 
-extern char outputBuffer[];
-
 static char *readFile(const char *path) {
     FILE *file = fopen(path, "rb");
     if (file == NULL) {

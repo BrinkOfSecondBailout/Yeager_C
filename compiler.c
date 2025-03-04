@@ -759,7 +759,7 @@ static void synchronize() {
     }
 }
 
-static int emitLoop(int loopStart) {
+static void emitLoop(int loopStart) {
     emitByte(OP_LOOP);
 
     int offset = currentChunk()->count - loopStart + 2;
