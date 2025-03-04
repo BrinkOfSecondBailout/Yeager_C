@@ -8,6 +8,8 @@
 #include "value.h"
 #include "vm.h"
 
+extern char outputBuffer[];
+
 static char *readFile(const char *path) {
     FILE *file = fopen(path, "rb");
     if (file == NULL) {
@@ -58,29 +60,52 @@ static void repl() {
     }
 }
 
-int main(int argc, const char *argv[]) {
+char *runCode(const char *source) {
     initVm();
-    if (argc == 1) {
-        repl();
-    } else if (argc == 2) {
-        runFile(argv[1]);
+    resetOutput();
+    InterpretResult result = interpret(source);
+    if (result == INTERPRET_OK) {
+        return outputBuffer[0] ? outputBuffer : "OK";
+    } else if (result == INTERPRET_COMPILE_ERROR) {
+        return "Compile Error";
     } else {
-        fprintf(stderr, "Usage: yeager [path]\n");
-        exit(64);
+        return "Runtime Error";
     }
     freeVm();
 }
 
-// char *runCode(const char *source) {
+int main() {
+}
+
+// int main() {
+//     writeOutput("Test: %d, %s\n", 123, "hello");
+//     printf("%s", outputBuffer);  // Should print "Test: 123, hello\n"
+//     return 0;
+// }
+
+// int main(int argc, const char *argv[]) {
+//     initVm();
+//     if (argc == 1) {
+//         repl();
+//     } else if (argc == 2) {
+//         runFile(argv[1]);
+//     } else {
+//         fprintf(stderr, "Usage: yeager [path]\n");
+//         exit(64);
+//     }
+//     freeVm();
+// }
+
+// int main(int argc, const char *argv[]) {
 //     initVm();
 //     resetOutput();
-//     InterpretResult result = interpret(source);
-//     if (result == INTERPRET_OK) {
-//         return "OK";
-//     } else if (result == INTERPRET_COMPILE_ERROR) {
-//         return "Compile Error";
+//     if (argc == 1) {
+//         repl();
+//     } else if (argc == 2) {
+//         runFile(argv[1]);
 //     } else {
-//         return "Runtime Error";
+//         fprintf(stderr, "Usage: yeager [path]\n");
+//         exit(64);
 //     }
 //     freeVm();
 // }

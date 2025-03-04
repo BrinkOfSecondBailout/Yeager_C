@@ -1,13 +1,10 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include <string.h>
 
 #include "memory.h"
 #include "object.h"
 #include "value.h"
-
-#define MAX_OUTPUT 1024
-static char outputBuffer[MAX_OUTPUT];
-static int outputPos = 0;
 
 void initValueArray(ValueArray *array) {
     array->count = 0;
@@ -30,12 +27,19 @@ void freeValueArray(ValueArray *array) {
     initValueArray(array);
 }
 
-void writeOutput(const char *text) {
-    int len = strlen(text);
-    if (outputPos + len < MAX_OUTPUT - 1) {
-        strcpy(outputBuffer + outputPos, text);
-        outputPos += len;
+void writeOutput(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    int spaceLeft = MAX_OUTPUT - outputPos - 1;
+    if (spaceLeft > 0) {
+        int written = vsnprintf(outputBuffer + outputPos, spaceLeft, format, args);
+        if (written > 0 && written < spaceLeft) {
+            outputPos += written;
+        } else if (written >= spaceLeft) {
+            outputPos = MAX_OUTPUT - 1;
+        }
     }
+    va_end(args);
 }
 
 void resetOutput() {
@@ -46,10 +50,10 @@ void resetOutput() {
 void printValue(Value value) {
     switch(value.type) {
         case VAL_BOOL:
-            printf(AS_BOOL(value) ? "true" : "false");
+            writeOutput(AS_BOOL(value) ? "true" : "false");
             break;
-        case VAL_NUMBER: printf("%g", AS_NUMBER(value)); break;
-        case VAL_NIL: printf("nil"); break;
+        case VAL_NUMBER: writeOutput("%g", AS_NUMBER(value)); break;
+        case VAL_NIL: writeOutput("nil"); break;
         case VAL_OBJ: printObject(value); break;
     }
 }

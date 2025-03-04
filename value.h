@@ -6,6 +6,10 @@
 typedef struct Obj Obj;
 typedef struct ObjString ObjString;
 
+#define MAX_OUTPUT 1024
+char outputBuffer[MAX_OUTPUT];
+int outputPos;
+
 typedef enum {
     VAL_BOOL,
     VAL_NIL,
@@ -45,6 +49,8 @@ typedef struct {
 void initValueArray(ValueArray *array);
 void writeValueArray(ValueArray *array, Value value);
 void freeValueArray(ValueArray *array);
+void writeOutput(const char *format, ...);
+void resetOutput();
 void printValue(Value value);
 bool valuesEqual(Value a, Value b);
 

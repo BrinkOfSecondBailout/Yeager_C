@@ -408,7 +408,7 @@ static InterpretResult run() {
             }
             case OP_PRINT: {
                 printValue(pop());
-                printf("\n");
+                writeOutput("\n");
                 break;
             }
             case OP_JUMP: {

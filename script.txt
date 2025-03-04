@@ -1,1 +1,5 @@
+emcc main.c compiler.c chunk.c debug.c memory.c object.c table.c scanner.c value.c vm.c -o yeager.html -s EXPORTED_FUNCTIONS='["_runCode"]' -s EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]' -s ALLOW_MEMORY_GROWTH=1
+
+gcc -o main.exe main.c compiler.c chunk.c debug.c memory.c object.c table.c scanner.c value.c vm.c && ./main.exe
+
 gcc -o main.exe main.c compiler.c chunk.c debug.c memory.c object.c table.c scanner.c value.c vm.c && ./main.exe code.txt
