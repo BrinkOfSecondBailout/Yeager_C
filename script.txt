@@ -1,0 +1,1 @@
+gcc -o main.exe main.c compiler.c chunk.c debug.c memory.c object.c table.c scanner.c value.c vm.c && ./main.exe code.txt
