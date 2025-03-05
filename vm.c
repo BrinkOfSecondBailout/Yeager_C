@@ -108,7 +108,6 @@ static void runtimeError(const char *format, ...) {
             writeOutput("%s()\n", function->name->chars);
         }
     }
-
     resetStack();
 }
 

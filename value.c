@@ -42,6 +42,7 @@ void writeOutput(const char *format, ...) {
         } else if (written >= spaceLeft) {
             outputPos = MAX_OUTPUT - 1;
         }
+        outputBuffer[outputPos] = '\0';
     }
     va_end(args);
 }
