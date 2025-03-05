@@ -67,11 +67,9 @@ char *runCode(const char *source) {
     output = outputBuffer[0] ? outputBuffer : "OK";
   } else if (result == INTERPRET_COMPILE_ERROR) {
     writeOutput("Compile Error");
-    writeOutput("\n");
     output = outputBuffer;
   } else {
     writeOutput("Runtime Error");
-    writeOutput("\n");
     output = outputBuffer;
   }
   freeVm();
