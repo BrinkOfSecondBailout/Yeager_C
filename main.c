@@ -70,7 +70,7 @@ char *runCode(const char *source) {
     writeOutput("\n");
     output = outputBuffer;
   } else {
-    writeOutput("Compile Error");
+    writeOutput("Runtime Error");
     writeOutput("\n");
     output = outputBuffer;
   }
