@@ -62,18 +62,55 @@ char *runCode(const char *source) {
     initVm();
     resetOutput();
     InterpretResult result = interpret(source);
+    char *output;
     if (result == INTERPRET_OK) {
-        return outputBuffer[0] ? outputBuffer : "OK";
+        output = outputBuffer[0] ? outputBuffer : "OK";
     } else if (result == INTERPRET_COMPILE_ERROR) {
-        return "Compile Error";
+        output = "Compile Error";
     } else {
-        return "Runtime Error";
+        output = "Runtime Error";
     }
     freeVm();
+    return output;
 }
 
-int main() {
+// Test function
+void testRunCode() {
+    // Test cases
+    const char *tests[] = {
+        "print 42;",                // Should output "42" to outputBuffer
+        "var x = 1; print x + 2;", // Should output "3"
+        "1 + \"bad\";",            // Should return "Runtime Error"
+        "if (true print 5;",       // Should return "Compile Error" (syntax error)
+        NULL                        // Sentinel to end the loop
+    };
+
+    for (int i = 0; tests[i] != NULL; i++) {
+        printf("Test %d: Input: '%s'\n", i + 1, tests[i]);
+        char *result = runCode(tests[i]);
+        printf("Result: '%s'\n", result);
+        if (strcmp(result, outputBuffer) == 0 && result != "OK" && result != "Compile Error" && result != "Runtime Error") {
+            printf("Output buffer returned: '%s'\n", outputBuffer);
+        } else {
+            printf("Static string returned: '%s'\n", result);
+        }
+        printf("---\n");
+    }
 }
+
+// Test mode
+int main(int argc, char *argv[]) {
+    if (argc == 1) {
+        // Normal REPL or file mode (your original main logic)
+        // ... (keep your existing main code here if desired)
+        printf("Running in REPL mode...\n");
+    } else if (strcmp(argv[1], "--test") == 0) {
+        // Test mode
+        testRunCode();
+    }
+    return 0;
+}
+
 
 // int main() {
 //     writeOutput("Test: %d, %s\n", 123, "hello");
