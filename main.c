@@ -66,15 +66,18 @@ char *runCode(const char *source) {
   if (result == INTERPRET_OK) {
     output = outputBuffer[0] ? outputBuffer : "OK";
   } else if (result == INTERPRET_COMPILE_ERROR) {
-    output = "Compile Error";
+    writeOutput("Compile Error");
+    writeOutput("\n");
+    output = outputBuffer;
   } else {
-    output = "Runtime Error";
+    writeOutput("Compile Error");
+    writeOutput("\n");
+    output = outputBuffer;
   }
   freeVm();
   return output;
 }
 
-int main() {}
 // Test function
 // void testRunCode() {
 //     // Test cases
