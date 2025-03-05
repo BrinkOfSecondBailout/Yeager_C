@@ -91,10 +91,12 @@ static void concatenate() {
 }
 
 static void runtimeError(const char *format, ...) {
+    char tempBuffer[512];
     va_list args;
     va_start(args, format);
-    writeOutput(format, args);
+    vsnprintf(tempBuffer, sizeof(tempBuffer), format, args);
     va_end(args);
+    writeOutput("%s", tempBuffer);
     writeOutput("\n");
 
     for (int i = vm.frameCount - 1; i >= 0; i--) {
