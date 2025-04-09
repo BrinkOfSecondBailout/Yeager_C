@@ -27,3 +27,8 @@ The code is written in pure C and is organized in a modular way to keep componen
 
 - A C compiler (GCC or Clang recommended)
 - `make`
+
+### Build Instructions
+
+```bash
+git clone https://github.com/BrinkOfSecondBailout/Yeager_C.git
