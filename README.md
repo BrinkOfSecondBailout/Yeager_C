@@ -2,6 +2,8 @@
 
 This project is an implementation of the **CLOX interpreter**, a Lox language interpreter written in C. It follows the second half of the book [*Crafting Interpreters* by Robert Nystrom](https://craftinginterpreters.com/), focusing on building a high-performance bytecode virtual machine.
 
+However, I implemented a lot of code and added extra features of my own. Ask me anything about the concepts that make up the building blocks of this project. 👀
+
 ## 🧠 What is Lox?
 
 Lox is a simple, dynamically typed programming language designed for learning and teaching interpreters. It features classes, closures, garbage collection, and a readable syntax inspired by languages like JavaScript and Python.
@@ -19,7 +21,7 @@ The project includes:
 - A mark-and-sweep garbage collector
 - Support for closures and native functions
 
-The code is written in pure C (C99) and is organized in a modular way to keep components like the scanner, compiler, and VM isolated and testable.
+The code is written in pure C and is organized in a modular way to keep components like the scanner, compiler, and VM isolated and testable.
 
 ### Requirements
 
